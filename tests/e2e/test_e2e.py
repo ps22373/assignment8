@@ -72,3 +72,29 @@ def test_calculator_divide_by_zero(page, fastapi_server):
     # "Error: Cannot divide by zero!". This verifies that the application handles division by zero
     # gracefully and displays the correct error message to the user.
     expect(page.locator('#result')).to_have_text('Error: Cannot divide by zero!')
+
+@pytest.mark.e2e
+def test_calculator_subtract(page, fastapi_server):
+    """
+    Test the subtraction functionality of the calculator.
+    """
+    page.goto('http://localhost:8000')
+
+    page.fill('#a', '10')
+    page.fill('#b', '5')
+    page.click('button:text("Subtract")')
+
+    expect(page.locator('#result')).to_have_text('Calculation Result: 5')
+
+@pytest.mark.e2e
+def test_calculator_multiply(page, fastapi_server):
+    """
+    Test the multiplication functionality of the calculator.
+    """
+    page.goto('http://localhost:8000')
+
+    page.fill('#a', '10')
+    page.fill('#b', '5')
+    page.click('button:text("Multiply")')
+
+    expect(page.locator('#result')).to_have_text('Calculation Result: 50')
